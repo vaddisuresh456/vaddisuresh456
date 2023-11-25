@@ -1,0 +1,46 @@
+- 👋 Hi, I’m @vaddisuresh456
+- 👀 I’m interested in ...
+- 🌱 I’m currently learning ...
+- 💞️ I’m looking to collaborate on ...
+- 📫 How to reach me ...
+
+<!---
+vaddisuresh456/vaddisuresh456 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+You can click the Preview link to take a look at your changes.
+--->
+import React, { useEffect, useState } from 'react';
+
+const EventPage = ({ match }) => {
+  const [event, setEvent] = useState(null);
+
+  useEffect(() => {
+    // Fetch event data based on match.params.id
+    // Set event data to state
+  }, [match.params.id]);
+
+  if (!event) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <h2>{event.title}</h2>
+      <p>Date: {event.date}</p>
+      <p>Location: {event.location}</p>
+      <p>Description: {event.description}</p>
+      {/* Other event details */}
+    </div>
+  );
+};
+
+export default EventPage;
+
+
+
+
+
+
+
+
+
+
