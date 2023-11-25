@@ -1,0 +1,25 @@
+import React, { useEffect, useState } from 'react';
+
+const ListingPage = () => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    // Fetch list of events
+    // Set events data to state
+  }, []);
+
+  return (
+    <div>
+      <h2>Event Listings</h2>
+      {events.map((event) => (
+        <div key={event.id}>
+          <h3>{event.title}</h3>
+          <p>Date: {event.date}</p>
+          {/* Display other event details or a link to view more */}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default ListingPage;
