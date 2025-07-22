@@ -1,0 +1,74 @@
+import React, { useState } from 'react';
+
+function OpenCloseButtons() {
+  const [buttons, setButtons] = useState([
+    { id: 1, label: 'Button 1' },
+    { id: 2, label: 'Button 2' },
+  ]);
+
+  // Add new button
+  const handleAddButton = () => {
+    const newId = buttons.length ? buttons[buttons.length - 1].id + 1 : 1;
+    setButtons([...buttons, { id: newId, label: `Button ${newId}` }]);
+  };
+
+  // Remove button by id
+  const handleRemoveButton = (id) => {
+    setButtons(buttons.filter((button) => button.id !== id));
+  };
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <button onClick={handleAddButton}>Add Button</button>
+      <div style={{ marginTop: '20px' }}>
+        {buttons.map((button) => (
+          <div key={button.id} style={{ marginBottom: '10px' }}>
+            <button>{button.label}</button>
+            <button
+              onClick={() => handleRemoveButton(button.id)}
+              style={{
+                marginLeft: '10px',
+                backgroundColor: 'red',
+                color: 'white',
+                border: 'none',
+                padding: '5px 10px',
+                cursor: 'pointer',
+              }}
+            >
+              X
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default OpenCloseButtons;
+
+
+App.js
+
+import React from 'react';
+import OpenCloseButtons from './OpenCloseButtons';
+
+function App() {
+  return (
+    <div>
+      <h1>Dynamic Open/Close Buttons</h1>
+      <OpenCloseButtons />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
