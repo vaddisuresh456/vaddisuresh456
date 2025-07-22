@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Form</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        button {
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Employee Form</h2>
+<form id="employeeForm">
+    <label>Name:</label>
+    <input type="text" id="name" required>
+    <label>Salary:</label>
+    <input type="number" id="salary" required>
+    <label>DOB:</label>
+    <input type="date" id="dob" required>
+    <button type="submit">Submit</button>
+</form>
+
+<h3>Employee List</h3>
+<table id="employeeTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>DOB</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dynamic rows will be added here -->
+    </tbody>
+</table>
+
+<script>
+    const employeeForm = document.getElementById('employeeForm');
+    const employeeTable = document.getElementById('employeeTable').getElementsByTagName('tbody')[0];
+
+    employeeForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const salary = document.getElementById('salary').value;
+        const dob = document.getElementById('dob').value;
+
+        addEmployeeRow(name, salary, dob);
+
+        employeeForm.reset();
+    });
+
+    function addEmployeeRow(name, salary, dob) {
+        const row = employeeTable.insertRow();
+
+        const nameCell = row.insertCell(0);
+        const salaryCell = row.insertCell(1);
+        const dobCell = row.insertCell(2);
+        const actionsCell = row.insertCell(3);
+
+        nameCell.textContent = name;
+        salaryCell.textContent = salary;
+        dobCell.textContent = dob;
+
+        const updateBtn = document.createElement('button');
+        updateBtn.textContent = 'Update';
+        updateBtn.addEventListener('click', function() {
+            const newName = prompt('Enter new name:', nameCell.textContent);
+            const newSalary = prompt('Enter new salary:', salaryCell.textContent);
+            const newDob = prompt('Enter new DOB (YYYY-MM-DD):', dobCell.textContent);
+            if (newName && newSalary && newDob) {
+                nameCell.textContent = newName;
+                salaryCell.textContent = newSalary;
+                dobCell.textContent = newDob;
+            }
+        });
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', function() {
+            employeeTable.deleteRow(row.rowIndex - 1);
+        });
+
+        actionsCell.appendChild(updateBtn);
+        actionsCell.appendChild(deleteBtn);
+    }
+</script>
+
+</body>
+</html>
